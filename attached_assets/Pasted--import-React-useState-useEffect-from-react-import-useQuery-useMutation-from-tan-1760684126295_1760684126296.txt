@@ -1,0 +1,302 @@
+
+
+import React, { useState, useEffect } from "react";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { apiRequest, queryClient } from "@/lib/queryClient";
+
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
+import { RefreshCw } from "lucide-react";
+import {
+  AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer,
+  Tooltip as RechartsTooltip
+} from "recharts";
+
+type HostStatus = "online" | "offline" | "warning";
+
+const HexagonCard = ({
+  label,
+  status
+}: {
+  label: string;
+  status: HostStatus;
+}) => {
+  const getColor = () => {
+    switch (status) {
+      case "online": return "bg-green-500";
+      case "offline": return "bg-red-500";
+      case "warning":
+      default:
+        return "bg-yellow-500";
+    }
+  };
+  return (
+    <div className="relative w-28 h-32 flex items-center justify-center">
+      <div className={`${getColor()} w-24 h-24 clip-hexagon flex items-center justify-center shadow-lg`}>
+        <span className="text-white font-bold text-sm text-center px-1">{label}</span>
+      </div>
+    </div>
+  );
+};
+
+interface ZabbixHost {
+  hostid: string;
+  host: string;
+  name: string;
+  status: string;
+  available?: string;
+  availabilityStatus: string;
+  ipAddress: string;
+  groups: string;
+  monitoringEnabled: boolean;
+  icmpStatus: string;
+  agentStatus: string;
+}
+
+interface HostMetrics {
+  hostid: string;
+  hostname: string;
+  cpuUtilization: number;
+  memoryUtilization: number;
+  diskUsage: number;
+  uptime: string;
+  status: string;
+  networkIn: number;
+  networkOut: number;
+  ipAddress: string;
+}
+
+export default function HostsDashboard() {
+  const { toast } = useToast();
+
+  const { data: savedSettings } = useQuery({
+    queryKey: ["/api/zabbix/settings"],
+    queryFn: async () => {
+      const resp = await apiRequest("GET", "/api/zabbix/settings");
+      return resp.json();
+    }
+  });
+
+  const [settings, setSettings] = useState({
+    zabbixUrl: "",
+    zabbixApiToken: "",
+    refreshInterval: 60
+  });
+
+  useEffect(() => {
+    if (savedSettings) {
+      setSettings({
+        zabbixUrl: savedSettings.zabbixUrl || savedSettings.zabbix_url || "",
+        zabbixApiToken: savedSettings.zabbixApiToken || savedSettings.zabbix_api_token || "",
+        refreshInterval: savedSettings.refreshInterval || savedSettings.refresh_interval || 60
+      });
+    }
+  }, [savedSettings]);
+
+  const { data: allHosts = [], refetch: refetchHosts } = useQuery<ZabbixHost[]>({
+    queryKey: ["/api/zabbix/hosts"],
+    queryFn: async () => {
+      const resp = await apiRequest("GET", "/api/zabbix/hosts");
+      return resp.json();
+    },
+    enabled: !!settings.zabbixUrl && !!settings.zabbixApiToken,
+    refetchInterval: settings.refreshInterval * 1000
+  });
+
+  const [selectedHostIds, setSelectedHostIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (allHosts.length > 0 && selectedHostIds.length === 0) {
+      const healthy = allHosts.filter(h => h.availabilityStatus === "available").map(h => h.hostid);
+      setSelectedHostIds(healthy.length > 0 ? healthy : allHosts.map(h => h.hostid));
+    }
+  }, [allHosts]);
+
+  const { data: hostMetrics = [] } = useQuery<HostMetrics[]>({
+    queryKey: ["/api/zabbix/metrics", selectedHostIds],
+    queryFn: async () => {
+      if (selectedHostIds.length === 0) return [];
+      const resp = await apiRequest("POST", "/api/zabbix/metrics", { hostIds: selectedHostIds });
+      return resp.json();
+    },
+    enabled: selectedHostIds.length > 0,
+    refetchInterval: settings.refreshInterval * 1000
+  });
+
+  type ViewMode = "all" | "selected" | "healthyOnly";
+  const [viewMode, setViewMode] = useState<ViewMode>("selected");
+
+  const getDisplayedHosts = (): ZabbixHost[] => {
+    if (viewMode === "all") return allHosts;
+    if (viewMode === "healthyOnly") {
+      return allHosts.filter(h => h.availabilityStatus === "available");
+    }
+    return allHosts.filter(h => selectedHostIds.includes(h.hostid));
+  };
+  const displayedHosts = getDisplayedHosts();
+
+  const toggleHost = (hostid: string) => {
+    setSelectedHostIds(prev => {
+      if (prev.includes(hostid)) return prev.filter(id => id !== hostid);
+      return [...prev, hostid];
+    });
+  };
+
+  const saveSettingsMutation = useMutation({
+    mutationFn: async (newSettings: typeof settings) => {
+      const resp = await apiRequest("POST", "/api/zabbix/settings", newSettings);
+      return resp.json();
+    },
+    onSuccess: () => {
+      toast({ title: "Settings saved" });
+      queryClient.invalidateQueries({ queryKey: ["/api/zabbix/settings"] });
+    }
+  });
+
+  const handleSaveSettings = () => {
+    saveSettingsMutation.mutate(settings);
+  };
+
+  const chartData = hostMetrics.map((m, idx) => ({
+    time: new Date(Date.now() - (hostMetrics.length - idx) * 60000).toLocaleTimeString(),
+    cpu: m.cpuUtilization,
+    ram: m.memoryUtilization
+  }));
+
+  return (
+    <div className="min-h-screen bg-gray-900 text-white p-6 flex">
+      <div className="w-64 bg-gray-800 p-4 rounded shadow-lg overflow-y-auto">
+        <div className="mb-4">
+          <h3 className="text-lg font-bold">Hosts</h3>
+          <div className="flex space-x-2 mt-2">
+            <Button size="sm" variant="outline" onClick={() => setSelectedHostIds(allHosts.map(h => h.hostid))}>
+              Select All
+            </Button>
+            <Button size="sm" variant="outline" onClick={() => setSelectedHostIds([])}>
+              Deselect All
+            </Button>
+          </div>
+        </div>
+        {allHosts.map(h => (
+          <div key={h.hostid} className="flex items-center mb-2">
+            <Checkbox
+              checked={selectedHostIds.includes(h.hostid)}
+              onCheckedChange={() => toggleHost(h.hostid)}
+            />
+            <span className="ml-2 text-sm">
+              {h.name} ({h.ipAddress}) – <i className="text-xs">{h.availabilityStatus}</i>
+            </span>
+          </div>
+        ))}
+        <div className="mt-6">
+          <h4 className="text-base font-semibold">Zabbix Settings</h4>
+          <div className="space-y-2 mt-2">
+            <div>
+              <Label>URL</Label>
+              <Input
+                className="bg-gray-700"
+                value={settings.zabbixUrl}
+                onChange={e => setSettings({ ...settings, zabbixUrl: e.target.value })}
+              />
+            </div>
+            <div>
+              <Label>API Token</Label>
+              <Input
+                className="bg-gray-700"
+                type="password"
+                value={settings.zabbixApiToken}
+                onChange={e => setSettings({ ...settings, zabbixApiToken: e.target.value })}
+              />
+            </div>
+            <Button onClick={handleSaveSettings} className="w-full">
+              Save Settings
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex-1 ml-6 space-y-6">
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold">Monitoring Dashboard</h2>
+          <div className="flex items-center space-x-3">
+            <Button variant="outline" onClick={() => queryClient.invalidateQueries()}>
+              <RefreshCw className="h-4 w-4" /> Refresh
+            </Button>
+            <select
+              value={viewMode}
+              onChange={e => setViewMode(e.target.value as ViewMode)}
+              className="bg-gray-700 text-white p-1 rounded"
+            >
+              <option value="selected">Selected</option>
+              <option value="all">All</option>
+              <option value="healthyOnly">Healthy Only</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-4 gap-4">
+          {displayedHosts.map(h => {
+            let status: HostStatus = "warning";
+            if (h.availabilityStatus === "available") status = "online";
+            else if (h.availabilityStatus === "unavailable") status = "offline";
+            else if (h.icmpStatus === "responding" || h.agentStatus === "available") status = "online";
+
+            return (
+              <div key={h.hostid} className="relative group">
+                <HexagonCard label={h.name.substring(0, 10)} status={status} />
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-900 text-white text-xs rounded px-2 py-1 whitespace-nowrap z-10">
+                  <div>{h.name} ({h.ipAddress})</div>
+                  <div>Status: {h.availabilityStatus}</div>
+                  <div>ICMP: {h.icmpStatus}</div>
+                  <div>Agent: {h.agentStatus}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <Card className="bg-gray-800 border-gray-700">
+          <CardHeader>
+            <CardTitle className="text-sm text-gray-400">CPU / RAM Over Time</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ResponsiveContainer width="100%" height={250}>
+              <AreaChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                <XAxis dataKey="time" stroke="#9ca3af" style={{ fontSize: "10px" }} />
+                <YAxis stroke="#9ca3af" />
+                <RechartsTooltip contentStyle={{ backgroundColor: "#1f2937", border: "none" }} />
+                <Area type="monotone" dataKey="cpu" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.6} />
+                <Area type="monotone" dataKey="ram" stroke="#10b981" fill="#10b981" fillOpacity={0.6} />
+              </AreaChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
+        <div className="grid grid-cols-2 gap-4">
+          {hostMetrics.map(m => (
+            <Card key={m.hostid} className="bg-gray-800 border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-sm text-gray-400">{m.hostname}</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <div>IP: {m.ipAddress}</div>
+                <div>CPU: {m.cpuUtilization.toFixed(1)}%</div>
+                <div>Memory: {m.memoryUtilization.toFixed(1)}%</div>
+                <div>Disk: {m.diskUsage.toFixed(1)}%</div>
+                <div>Uptime: {m.uptime}</div>
+                <div>Net In: {m.networkIn.toFixed(1)}</div>
+                <div>Net Out: {m.networkOut.toFixed(1)}</div>
+                <div>Status: {m.status}</div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}

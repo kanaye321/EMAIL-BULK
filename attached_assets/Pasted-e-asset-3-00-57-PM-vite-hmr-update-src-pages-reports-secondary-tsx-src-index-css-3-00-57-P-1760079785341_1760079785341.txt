@@ -1,0 +1,46 @@
+e":"asset…
+3:00:57 PM [vite] hmr update /src/pages/reports-secondary.tsx, /src/index.css
+3:00:57 PM [vite] Internal server error: C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\client\src\pages\reports-secondary.tsx: Expected corresponding JSX closing tag for <TabsContent>. (1239:16)
+
+  1237 |                     Export to Excel
+  1238 |                   </Button>
+> 1239 |                 </div>
+       |                 ^
+  1240 |
+  1241 |                 <Card className="border-2 border-orange-100">
+  1242 |                   <CardHeader className="bg-gradient-to-r from-orange-50 to-orange-100">
+  Plugin: vite:react-babel
+  File: C:/SRPH MIS Inventory Server/Latest/PORT 3000 - 1/4/Cloud-v1-1/client/src/pages/reports-secondary.tsx:1239:16
+  1237|                      Export to Excel
+  1238|                    </Button>
+  1239|                  </div>
+     |                  ^
+  1240|
+  1241|                  <Card className="border-2 border-orange-100">
+      at toParseError (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\parse-error.ts:95:45)
+      at raise (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\tokenizer\index.ts:1497:19)
+      at jsxParseElementAt (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:527:18)
+      at jsxParseElementAt (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:483:34)
+      at jsxParseElementAt (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:483:34)
+      at jsxParseElementAt (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:483:34)
+      at jsxParseElementAt (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:483:34)
+      at jsxParseElementAt (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:483:34)
+      at jsxParseElement (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:559:19)
+      at parseExprAtom (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:573:21)
+      at parseExprSubscripts (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:714:23)
+      at parseUpdate (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:693:21)
+      at parseMaybeUnary (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:655:23)
+      at parseMaybeUnary (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\plugins\typescript\index.ts:3735:20)
+      at parseMaybeUnaryOrPrivate (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:389:14)
+      at parseExprOps (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:401:23)
+      at parseMaybeConditional (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:356:23)
+      at parseMaybeAssign (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:298:21)
+      at fn (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\plugins\typescript\index.ts:3588:23)
+      at tryParse (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\parser\util.ts:174:20)
+      at parseMaybeAssign (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\plugins\typescript\index.ts:3587:20)
+      at callback (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:252:12)
+      at allowInAnd (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:3117:12)
+      at parseMaybeAssignAllowIn (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:251:17)
+      at parseParenAndDistinguishExpression (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:1771:16)
+      at parseExprAtom (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:1131:21)
+      at parseExprAtom (C:\SRPH MIS Inventory Server\Latest\PORT 3000 - 1\4\Clo...

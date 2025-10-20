@@ -1,0 +1,90 @@
+Admin status normalized to: true
+Admin permissions loaded for user admin
+Page Builder: Received page creation request: {
+  "pageName": "czxc",
+  "pageSlug": "czxc",
+  "tableName": "xczxc",
+  "description": "",
+  "icon": "FileText",
+  "columns": [
+    {
+      "name": "czxcz",
+      "type": "text",
+      "label": "xzczxc",
+      "required": false,
+      "searchable": true,
+      "sortable": true,
+      "filterable": true,
+      "defaultValue": ""
+    },
+    {
+      "name": "czxczxc",
+      "type": "text",
+      "label": "zxczxc",
+      "required": false,
+      "searchable": true,
+      "sortable": true,
+      "filterable": true,
+      "defaultValue": ""
+    },
+    {
+      "name": "czxczc",
+      "type": "text",
+      "label": "zxczxc",
+      "required": false,
+      "searchable": true,
+      "sortable": true,
+      "filterable": true,
+      "defaultValue": ""
+    }
+  ],
+  "filters": [],
+  "sortConfig": {
+    "field": "id",
+    "direction": "asc"
+  },
+  "paginationConfig": {
+    "pageSize": 10,
+    "enabled": true
+  },
+  "importExportEnabled": true
+}
+Page Builder: Creating table with SQL: CREATE TABLE IF NOT EXISTS "xczxc" (id SERIAL PRIMARY KEY, "czxcz" TEXT NULL, "czxczxc" TEXT NULL, "czxczc" TEXT NULL, created_at TIMESTAMP DEFAULT NOW() NOT NULL, updated_at TIMESTAMP DEFAULT NOW() NOT NULL)
+Page Builder: Table verification result: { exists: true }
+Page Builder: Inserting page config: {
+  pageName: 'czxc',
+  pageSlug: 'czxc',
+  tableName: 'xczxc',
+  description: null,
+  icon: 'FileText',
+  columns: '[{"name":"czxcz","type":"text","label":"xzczxc","required":false,"searchable":true,"sortable":true,"filterable":true,"defaultValue":""},{"name":"czxczxc","type":"text","label":"zxczxc","required":false,"searchable":true,"sortable":true,"filterable":true,"defaultValue":""},{"name":"czxczc","type":"text","label":"zxczxc","required":false,"searchable":true,"sortable":true,"filterable":true,"defaultValue":""}]',
+  filters: '[]',
+  sortConfig: '{"field":"id","direction":"asc"}',
+  paginationConfig: '{"pageSize":10,"enabled":true}',
+  importExportEnabled: true,
+  createdBy: 1
+}
+Page Builder: Error creating custom page: error: column "page_name" of relation "custom_pages" does not exist
+    at C:\Users\samsung\Downloads\Cloud-v1-1 (21)\Cloud-v1-1\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async <anonymous> (C:\Users\samsung\Downloads\Cloud-v1-1 (21)\Cloud-v1-1\server\page-builder-routes.ts:179:25) {
+  length: 134,
+  severity: 'ERROR',
+  code: '42703',
+  detail: undefined,
+  hint: undefined,
+  position: '47',
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'parse_target.c',
+  line: '1070',
+  routine: 'checkInsertTargets'
+}
+10:07:46 AM [express] POST /api/page-builder/pages 500 in 63ms :: {"message":"Failed to create custom…
+Starting deserialization for user ID: 1

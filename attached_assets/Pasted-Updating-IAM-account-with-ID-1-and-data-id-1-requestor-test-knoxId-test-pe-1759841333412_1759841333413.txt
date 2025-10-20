@@ -1,0 +1,35 @@
+Updating IAM account with ID: 1 and data: {
+  id: 1,
+  requestor: 'test',
+  knoxId: 'test',
+  permission: 'test',
+  durationStartDate: '2025-09-30',
+  durationEndDate: '2025-10-23',
+  cloudPlatform: 'test',
+  projectAccounts: 'test',
+  approvalId: 'test1234',
+  remarks: '',
+  status: 'active',
+  createdAt: '2025-10-07T19:42:45.800Z',
+  updatedAt: '2025-10-07T19:42:45.800Z'
+}
+Error updating IAM account: TypeError: value.toISOString is not a function
+    at PgTimestamp.mapToDriverValue (C:\Users\samsung\Downloads\Cloud-v1-1 (7)\Cloud-v1-1\node_modules\src\pg-core\columns\timestamp.ts:66:16)
+    at <anonymous> (C:\Users\samsung\Downloads\Cloud-v1-1 (7)\Cloud-v1-1\node_modules\src\sql\sql.ts:223:69)
+    at Array.map (<anonymous>)
+    at SQL.buildQueryFromSourceParams (C:\Users\samsung\Downloads\Cloud-v1-1 (7)\Cloud-v1-1\node_modules\src\sql\sql.ts:148:30)
+    at <anonymous> (C:\Users\samsung\Downloads\Cloud-v1-1 (7)\Cloud-v1-1\node_modules\src\sql\sql.ts:174:17)
+    at Array.map (<anonymous>)
+    at SQL.buildQueryFromSourceParams (C:\Users\samsung\Downloads\Cloud-v1-1 (7)\Cloud-v1-1\node_modules\src\sql\sql.ts:148:30)
+    at <anonymous> (C:\Users\samsung\Downloads\Cloud-v1-1 (7)\Cloud-v1-1\node_modules\src\sql\sql.ts:174:17)
+    at Array.map (<anonymous>)
+    at SQL.buildQueryFromSourceParams (C:\Users\samsung\Downloads\Cloud-v1-1 (7)\Cloud-v1-1\node_modules\src\sql\sql.ts:148:30)
+    at <anonymous> (C:\Users\samsung\Downloads\Cloud-v1-1 (7)\Cloud-v1-1\node_modules\src\sql\sql.ts:124:23)
+    at Object.startActiveSpan (C:\Users\samsung\Downloads\Cloud-v1-1 (7)\Cloud-v1-1\node_modules\src\tracing.ts:27:11)
+    at SQL.toQuery (C:\Users\samsung\Downloads\Cloud-v1-1 (7)\Cloud-v1-1\node_modules\src\sql\sql.ts:123:17)
+    at PgDialect.sqlToQuery (C:\Users\samsung\Downloads\Cloud-v1-1 (7)\Cloud-v1-1\node_modules\src\pg-core\dialect.ts:591:14)
+    at QueryPromise._prepare (C:\Users\samsung\Downloads\Cloud-v1-1 (7)\Cloud-v1-1\node_modules\src\pg-core\query-builders\update.ts:579:18)
+    at QueryPromise.execute (C:\Users\samsung\Downloads\Cloud-v1-1 (7)\Cloud-v1-1\node_modules\src\pg-core\query-builders\update.ts:596:15)
+    at QueryPromise.then (C:\Users\samsung\Downloads\Cloud-v1-1 (7)\Cloud-v1-1\node_modules\src\query-promise.ts:31:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+8:48:28 PM [express] PUT /api/iam-accounts/1 500 in 6ms :: {"message":"Failed to update IAM account"}

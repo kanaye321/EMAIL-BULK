@@ -1,0 +1,108 @@
+✅ PostgreSQL connection successful
+✅ Using PostgreSQL database - data will persist
+✅ Database initialization complete - migrations will proceed
+Error:   Failed to scan for dependencies from entries:
+  C:/Users/samsung/Downloads/Cloud-v1-1 (24)/Cloud-v1-1/client/index.html
+
+  X [ERROR] Unexpected closing "ResizablePanel" tag does not match opening "div" tag
+
+    client/src/pages/azure-inventory.tsx:605:16:
+      605 │               </ResizablePanel>
+          │                 ~~~~~~~~~~~~~~
+          ╵                 div
+
+  The opening "div" tag is here:
+
+    client/src/pages/azure-inventory.tsx:512:11:
+      512 │           <div className="overflow-x-auto">
+          ╵            ~~~
+
+
+X [ERROR] Unexpected closing "ResizablePanelGroup" tag does not match opening "CardContent" tag
+
+    client/src/pages/azure-inventory.tsx:812:14:
+      812 │             </ResizablePanelGroup>
+          │               ~~~~~~~~~~~~~~~~~~~
+          ╵               CardContent
+
+  The opening "CardContent" tag is here:
+
+    client/src/pages/azure-inventory.tsx:511:13:
+      511 │             <CardContent className="p-0">
+          ╵              ~~~~~~~~~~~
+
+
+X [ERROR] Unexpected closing "div" tag does not match opening "Card" tag
+
+    client/src/pages/azure-inventory.tsx:813:12:
+      813 │           </div>
+          │             ~~~
+          ╵             Card
+
+  The opening "Card" tag is here:
+
+    client/src/pages/azure-inventory.tsx:506:11:
+      506 │           <Card>
+          ╵            ~~~~
+
+
+X [ERROR] Unexpected closing "CardContent" tag does not match opening "TabsContent" tag
+
+    client/src/pages/azure-inventory.tsx:868:10:
+      868 │         </CardContent>
+          │           ~~~~~~~~~~~
+          ╵           TabsContent
+
+  The opening "TabsContent" tag is here:
+
+    client/src/pages/azure-inventory.tsx:505:9:
+      505 │         <TabsContent value="current">
+          ╵          ~~~~~~~~~~~
+
+
+X [ERROR] Unexpected closing "Card" tag does not match opening "Tabs" tag
+
+    client/src/pages/azure-inventory.tsx:869:8:
+      869 │       </Card>
+          │         ~~~~
+          ╵         Tabs
+
+  The opening "Tabs" tag is here:
+
+    client/src/pages/azure-inventory.tsx:492:7:
+      492 │       <Tabs defaultValue="current" className="space-y-4">
+          ╵        ~~~~
+
+
+X [ERROR] Unexpected closing "TabsContent" tag does not match opening "div" tag
+
+    client/src/pages/azure-inventory.tsx:870:10:
+      870 │         </TabsContent>
+          │           ~~~~~~~~~~~
+          ╵           div
+
+  The opening "div" tag is here:
+
+    client/src/pages/azure-inventory.tsx:445:5:
+      445 │     <div className="space-y-6">
+          ╵      ~~~
+
+
+X [ERROR] Expected ")" but found "value"
+
+    client/src/pages/azure-inventory.tsx:872:21:
+      872 │         <TabsContent value="historical">
+          │                      ~~~~~
+          ╵                      )
+
+
+    at failureErrorWithLog (C:\Users\samsung\Downloads\Cloud-v1-1 (24)\Cloud-v1-1\node_modules\vite\node_modules\esbuild\lib\main.js:1472:15)
+    at C:\Users\samsung\Downloads\Cloud-v1-1 (24)\Cloud-v1-1\node_modules\vite\node_modules\esbuild\lib\main.js:945:25
+    at runOnEndCallbacks (C:\Users\samsung\Downloads\Cloud-v1-1 (24)\Cloud-v1-1\node_modules\vite\node_modules\esbuild\lib\main.js:1315:45)
+    at buildResponseToResult (C:\Users\samsung\Downloads\Cloud-v1-1 (24)\Cloud-v1-1\node_modules\vite\node_modules\esbuild\lib\main.js:943:7)
+    at C:\Users\samsung\Downloads\Cloud-v1-1 (24)\Cloud-v1-1\node_modules\vite\node_modules\esbuild\lib\main.js:955:9
+    at new Promise (<anonymous>)
+    at requestCallbacks.on-end (C:\Users\samsung\Downloads\Cloud-v1-1 (24)\Cloud-v1-1\node_modules\vite\node_modules\esbuild\lib\main.js:954:54)
+    at handleRequest (C:\Users\samsung\Downloads\Cloud-v1-1 (24)\Cloud-v1-1\node_modules\vite\node_modules\esbuild\lib\main.js:647:17)
+    at handleIncomingPacket (C:\Users\samsung\Downloads\Cloud-v1-1 (24)\Cloud-v1-1\node_modules\vite\node_modules\esbuild\lib\main.js:672:7)
+    at Socket.readFromStdout (C:\Users\samsung\Downloads\Cloud-v1-1 (24)\Cloud-v1-1\node_modules\vite\node_modules\esbuild\lib\main.js:600:7)

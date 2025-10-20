@@ -1,0 +1,112 @@
+Admin status normalized to: true
+Admin permissions loaded for user admin
+Page Builder: Received page creation request: {
+  "pageName": "TEST PAGE",
+  "pageSlug": "test-page",
+  "tableName": "test_page",
+  "description": "PAGE BUILDER TEST",
+  "icon": "Table",
+  "columns": [
+    {
+      "name": "knoxid",
+      "type": "text",
+      "label": "Knox ID",
+      "required": false,
+      "searchable": true,
+      "sortable": true,
+      "filterable": true,
+      "defaultValue": ""
+    },
+    {
+      "name": "name",
+      "type": "text",
+      "label": "Name",
+      "required": false,
+      "searchable": true,
+      "sortable": true,
+      "filterable": true,
+      "defaultValue": ""
+    },
+    {
+      "name": "model",
+      "type": "text",
+      "label": "Model",
+      "required": false,
+      "searchable": true,
+      "sortable": true,
+      "filterable": true,
+      "defaultValue": ""
+    },
+    {
+      "name": "date_requested",
+      "type": "text",
+      "label": "Date Requested",
+      "required": false,
+      "searchable": true,
+      "sortable": true,
+      "filterable": true,
+      "defaultValue": ""
+    },
+    {
+      "name": "date_received",
+      "type": "text",
+      "label": "Date Receive",
+      "required": false,
+      "searchable": true,
+      "sortable": true,
+      "filterable": true,
+      "defaultValue": ""
+    }
+  ],
+  "filters": [],
+  "sortConfig": {
+    "field": "id",
+    "direction": "asc"
+  },
+  "paginationConfig": {
+    "pageSize": 10,
+    "enabled": true
+  },
+  "importExportEnabled": true
+}
+Page Builder: Creating table with SQL: CREATE TABLE IF NOT EXISTS "test_page" (id SERIAL PRIMARY KEY, "knoxid" TEXT NULL, "name" TEXT NULL, "model" TEXT NULL, "date_requested" TEXT NULL, "date_received" TEXT NULL, created_at TIMESTAMP DEFAULT NOW() NOT NULL, updated_at TIMESTAMP DEFAULT NOW() NOT NULL)
+Page Builder: Table verification result: { exists: true }
+Page Builder: Inserting page config: {
+  pageName: 'TEST PAGE',
+  pageSlug: 'test-page',
+  tableName: 'test_page',
+  description: 'PAGE BUILDER TEST',
+  icon: 'Table',
+  columns: '[{"name":"knoxid","type":"text","label":"Knox ID","required":false,"searchable":true,"sortable":true,"filterable":true,"defaultValue":""},{"name":"name","type":"text","label":"Name","required":false,"searchable":true,"sortable":true,"filterable":true,"defaultValue":""},{"name":"model","type":"text","label":"Model","required":false,"searchable":true,"sortable":true,"filterable":true,"defaultValue":""},{"name":"date_requested","type":"text","label":"Date Requested","required":false,"searchable":true,"sortable":true,"filterable":true,"defaultValue":""},{"name":"date_received","type":"text","label":"Date Receive","required":false,"searchable":true,"sortable":true,"filterable":true,"defaultValue":""}]',
+  filters: '[]',
+  sortConfig: '{"field":"id","direction":"asc"}',
+  paginationConfig: '{"pageSize":10,"enabled":true}',
+  importExportEnabled: true,
+  createdBy: 1
+}
+Page Builder: Error creating custom page: error: column "page_name" of relation "custom_pages" does not exist
+    at C:\Users\samsung\Downloads\Cloud-v1-1 (21)\Cloud-v1-1\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async <anonymous> (C:\Users\samsung\Downloads\Cloud-v1-1 (21)\Cloud-v1-1\node_modules\src\node-postgres\session.ts:104:19)
+    at async <anonymous> (C:\Users\samsung\Downloads\Cloud-v1-1 (21)\Cloud-v1-1\server\page-builder-routes.ts:169:25) {
+  length: 134,
+  severity: 'ERROR',
+  code: '42703',
+  detail: undefined,
+  hint: undefined,
+  position: '35',
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'parse_target.c',
+  line: '1070',
+  routine: 'checkInsertTargets'
+}
+9:29:32 AM [express] POST /api/page-builder/pages 500 in 17ms :: {"message":"Failed to create custom…
+Starting deserialization for user ID: 1
+User found - ID: 1, Username: admin, MFA: true

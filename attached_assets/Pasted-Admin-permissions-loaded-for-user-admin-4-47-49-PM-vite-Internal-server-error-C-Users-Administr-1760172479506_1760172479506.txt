@@ -1,0 +1,68 @@
+Admin permissions loaded for user admin
+4:47:49 PM [vite] Internal server error: C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\client\src\pages\custom-page.tsx: Identifier 'pageData' has already been declared. (16:37)
+
+  14 |
+  15 |
+> 16 | export default function CustomPage({ pageData }: { pageData?: any }) {
+     |                                      ^
+  17 |   const params = useParams();
+  18 |   const slug = params.slug || pageData?.pageSlug;
+  19 |   const { toast } = useToast();
+  Plugin: vite:react-babel
+  File: C:/Users/Administrator/Desktop/Cloud-v1-1/Cloud-v1-1/client/src/pages/custom-page.tsx:16:37
+  14 |
+  15 |
+  16 |  export default function CustomPage({ pageData }: { pageData?: any }) {
+     |                                       ^
+  17 |    const params = useParams();
+  18 |    const slug = params.slug || pageData?.pageSlug;
+      at toParseError (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parse-error.ts:95:45)
+      at raise (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\tokenizer\index.ts:1503:19)
+      at checkRedeclarationInScope (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\util\scope.ts:164:19)
+      at declareName (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\util\scope.ts:139:14)
+      at declareName (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\plugins\typescript\scope.ts:89:11)
+      at declareNameFromIdentifier (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\lval.ts:818:16)
+      at checkIdentifier (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\lval.ts:813:12)
+      at checkLVal (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\lval.ts:713:12)
+      at checkLVal (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\lval.ts:777:12)
+      at checkLVal (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\lval.ts:766:16)
+      at checkParams (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:2692:12)
+      at hasStrictModeDirective (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:2641:16)
+      at parseBlockOrModuleBlockBody (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\statement.ts:1463:22)
+      at parseBlockBody (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\statement.ts:1412:10)
+      at parseBlock (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\statement.ts:1380:10)
+      at parseFunctionBody (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:2616:24)
+      at parseFunctionBodyAndFinish (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:2585:10)
+      at parseFunctionBodyAndFinish (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\plugins\typescript\index.ts:2646:20)
+      at callback (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\statement.ts:1690:12)
+      at withSmartMixTopicForbiddingContext (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:3166:14)
+      at parseFunction (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\statement.ts:1688:10)
+      at parseExportDefaultExpression (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\statement.ts:2565:19)
+      at parseExportDefaultExpression (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\plugins\typescript\index.ts:3117:20)
+      at parseExport (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\statement.ts:2447:25)
+      at parseExport (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\plugins\typescript\index.ts:3087:22)
+      at parseStatementContent (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\statement.ts:644:25)
+      at parseStatementContent (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\plugins\typescript\index.ts:3185:20)
+      at parseStatementLike (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\statement.ts:477:17)
+      at parseModuleItem (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\statement.ts:414:17)
+      at parseBlockOrModuleBlockBody (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\statement.ts:1438:16)
+      at parseBlockBody (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\statement.ts:1412:10)
+      at parseProgram (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\statement.ts:229:10)
+      at parseTopLevel (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\statement.ts:203:25)
+      at parse (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\parser\index.ts:93:10)
+      at parse (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\plugins\typescript\index.ts:4309:20)
+      at parse (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\parser\src\index.ts:92:38)
+      at parser (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\core\src\parser\index.ts:28:19)
+      at parser.next (<anonymous>)
+      at normalizeFile (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\core\src\transformation\normalize-file.ts:49:24)
+      at normalizeFile.next (<anonymous>)
+      at run (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\core\src\transformation\index.ts:40:36)
+      at run.next (<anonymous>)
+      at transform (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\core\src\transform.ts:29:20)
+      at transform.next (<anonymous>)
+      at step (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\gensync\index.js:261:32)
+      at C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\gensync\index.js:273:13
+      at async.call.result.err.err (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\gensync\index.js:223:11)
+      at C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\gensync\index.js:189:28
+      at <anonymous> (C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\@babel\core\src\gensync-utils\async.ts:90:7)
+      at C:\Users\Administrator\Desktop\Cloud-v1-1\Cloud-v1-1\node_modules\gensync\index.js:113:33

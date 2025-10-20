@@ -1,0 +1,169 @@
+import type { Express, Request, Response } from "express";
+import { db } from "./db";
+import { sql } from "drizzle-orm";
+
+// Zabbix API request helper
+async function zabbixApiRequest(
+  settings: { zabbixUrl: string; zabbixApiToken: string; refreshInterval?: number },
+  method: string,
+  params: any = {}
+) {
+  const resp = await fetch(`${settings.zabbixUrl}/api_jsonrpc.php`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json-rpc",
+      "Authorization": `Bearer ${settings.zabbixApiToken}`
+    },
+    body: JSON.stringify({
+      jsonrpc: "2.0",
+      method,
+      params,
+      id: 1
+    })
+  });
+
+  if (!resp.ok) {
+    throw new Error(`Zabbix API HTTP error: ${resp.status} ${resp.statusText}`);
+  }
+  const data = await resp.json();
+  if (data.error) {
+    throw new Error(`Zabbix API error: ${data.error.data || data.error.message}`);
+  }
+  return data.result;
+}
+
+export function registerZabbixRoutes(app: Express, requireAuth: any) {
+  // Hosts endpoint with enhanced logic
+  app.get("/api/zabbix/hosts", requireAuth, async (req: Request, res: Response) => {
+    try {
+      if (!db) {
+        return res.status(503).json({ message: "Database not available" });
+      }
+
+      const settingsResult = await db.execute(sql`
+        SELECT * FROM zabbix_settings LIMIT 1
+      `);
+      const settingsRow = settingsResult.rows[0];
+      if (!settingsRow) {
+        return res.status(400).json({ message: "Zabbix not configured" });
+      }
+
+      const zabbixUrl = settingsRow.zabbix_url || settingsRow.zabbixUrl;
+      const zabbixApiToken = settingsRow.zabbix_api_token || settingsRow.zabbixApiToken;
+      if (!zabbixUrl || !zabbixApiToken) {
+        return res.status(400).json({ message: "Zabbix URL or API token missing" });
+      }
+
+      let apiUrl = zabbixUrl;
+      if (!apiUrl.endsWith("/api_jsonrpc.php")) {
+        apiUrl = `${apiUrl.replace(/\/$/, "")}/api_jsonrpc.php`;
+      }
+      const baseUrl = apiUrl.replace("/api_jsonrpc.php", "");
+
+      // Fetch hosts
+      const hosts: any[] = await zabbixApiRequest(
+        {
+          zabbixUrl: baseUrl,
+          zabbixApiToken,
+          refreshInterval: settingsRow.refresh_interval || settingsRow.refreshInterval || 60
+        },
+        "host.get",
+        {
+          output: ["hostid", "host", "name", "status", "available", "error", "disable_until"],
+          selectInterfaces: ["interfaceid", "ip", "type", "main", "available", "error", "details"],
+          selectGroups: ["groupid", "name"],
+          limitSelects: 5
+        }
+      );
+
+      const enriched = await Promise.all(hosts.map(async (host: any) => {
+        let availabilityStatus = "unknown";
+        let icmpStatus = "unknown";
+        let agentStatus = "unknown";
+
+        // Interface availability
+        let hasAvailableInterface = false;
+        let hasUnavailableInterface = false;
+        if (Array.isArray(host.interfaces)) {
+          for (const iface of host.interfaces) {
+            const val = parseInt(iface.available || "0");
+            if (val === 1) hasAvailableInterface = true;
+            else if (val === 2) hasUnavailableInterface = true;
+          }
+        }
+
+        // Fetch items for ping / agent checks
+        let items: any[] = [];
+        try {
+          items = await zabbixApiRequest(
+            {
+              zabbixUrl: baseUrl,
+              zabbixApiToken,
+              refreshInterval: settingsRow.refresh_interval || settingsRow.refreshInterval || 60
+            },
+            "item.get",
+            {
+              hostids: [host.hostid],
+              output: ["itemid", "key_", "lastvalue", "name"],
+              monitored: true
+            }
+          );
+        } catch (err) {
+          console.warn(`Unable to fetch items for host ${host.hostid}:`, err);
+        }
+
+        // ICMP / ping detection
+        const icmpItem = items.find(i =>
+          (i.key_ && i.key_.includes("icmpping")) ||
+          (i.name && i.name.toLowerCase().includes("ping"))
+        );
+        if (icmpItem && icmpItem.lastvalue !== undefined) {
+          const v = parseFloat(icmpItem.lastvalue);
+          if (!isNaN(v)) {
+            icmpStatus = v > 0 ? "responding" : "no response";
+          }
+        }
+
+        // Agent ping
+        const agentItem = items.find(i => i.key_ === "agent.ping");
+        if (agentItem && agentItem.lastvalue !== undefined) {
+          const v2 = parseFloat(agentItem.lastvalue);
+          if (!isNaN(v2)) {
+            agentStatus = v2 > 0 ? "available" : "unavailable";
+          }
+        }
+
+        // Decide final availabilityStatus
+        if (hasAvailableInterface) {
+          availabilityStatus = "available";
+        } else if (hasUnavailableInterface) {
+          availabilityStatus = "unavailable";
+        } else if (host.available !== undefined && host.available !== null) {
+          const hv = parseInt(host.available);
+          if (hv === 1) availabilityStatus = "available";
+          else if (hv === 2) availabilityStatus = "unavailable";
+        } else if (icmpStatus === "responding" || agentStatus === "available") {
+          availabilityStatus = "available";
+        } else if (parseInt(host.status) === 0) {
+          availabilityStatus = "assumed_available";
+        } else {
+          availabilityStatus = "unknown";
+        }
+
+        return {
+          ...host,
+          ipAddress: host.interfaces?.[0]?.ip ?? "N/A",
+          groups: host.groups?.map((g: any) => g.name).join(", ") || "None",
+          availabilityStatus,
+          icmpStatus,
+          agentStatus,
+          monitoringEnabled: parseInt(host.status) === 0
+        };
+      }));
+
+      res.json(enriched);
+    } catch (err: any) {
+      console.error("Error /api/zabbix/hosts:", err);
+      res.status(500).json({ message: err.message });
+    }
+  });

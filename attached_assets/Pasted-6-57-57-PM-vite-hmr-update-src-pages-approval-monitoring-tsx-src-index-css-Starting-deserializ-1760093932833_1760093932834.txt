@@ -1,0 +1,73 @@
+6:57:57 PM [vite] hmr update /src/pages/approval-monitoring.tsx, /src/index.css
+Starting deserialization for user ID: 1
+User found - ID: 1, Username: admin, MFA: true
+Deserializing user admin with admin status: true, roleId: null
+Admin status normalized to: true
+Admin permissions loaded for user admin
+6:57:57 PM [vite] Internal server error: C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\client\src\pages\approval-monitoring.tsx: Unexpected token (603:21)
+
+  601 |                         setCsvFile(file);
+  602 |                       }
+> 603 |                     }}
+      |                      ^
+  604 |                   />
+  605 |                   <p className="text-xs text-muted-foreground mt-1">
+  606 |                     Only CSV files are accepted (.csv)
+  Plugin: vite:react-babel
+  File: C:/Users/samsung/Downloads/Cloud-v1-1 (30)/Cloud-v1-1/client/src/pages/approval-monitoring.tsx:603:21
+  601|                          setCsvFile(file);
+  602|                        }
+  603|                      }}
+     |                       ^
+  604|                    />
+  605|                    <p className="text-xs text-muted-foreground mt-1">
+      at toParseError (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parse-error.ts:95:45)
+      at raise (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\tokenizer\index.ts:1503:19)
+      at unexpected (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\tokenizer\index.ts:1543:16)
+      at jsxParseIdentifier (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:278:14)
+      at jsxParseNamespacedName (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:288:25)
+      at jsxParseAttribute (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:413:24)
+      at jsxParseOpeningElementAfterName (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:440:30)
+      at jsxParseOpeningElementAfterName (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\typescript\index.ts:4171:20)
+      at jsxParseOpeningElementAt (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:430:19)
+      at jsxParseElementAt (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:470:35)
+      at jsxParseElementAt (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:483:34)
+      at jsxParseElementAt (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:483:34)
+      at jsxParseElementAt (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:483:34)
+      at jsxParseElementAt (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:483:34)
+      at jsxParseElementAt (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:483:34)
+      at jsxParseElementAt (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:483:34)
+      at jsxParseElementAt (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:483:34)
+      at jsxParseElement (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:559:19)
+      at parseExprAtom (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:573:21)
+      at parseExprSubscripts (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:734:23)
+      at parseUpdate (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:713:21)
+      at parseMaybeUnary (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:675:23)
+      at parseMaybeUnary (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\typescript\index.ts:3855:20)
+      at parseMaybeUnaryOrPrivate (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:409:14)
+      at parseExprOps (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:421:23)
+      at parseMaybeConditional (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:376:23)
+      at parseMaybeAssign (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:301:21)
+      at fn (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\typescript\index.ts:3708:23)
+      at tryParse (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\util.ts:174:20)
+      at parseMaybeAssign (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\typescript\index.ts:3707:20)
+      at callback (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:257:12)
+      at allowInAnd (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:3192:12)
+      at parseMaybeAssignAllowIn (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:256:17)
+      at parseMaybeAssignAllowInOrVoidPattern (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:3306:17)
+      at parseParenAndDistinguishExpression (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:1813:16)
+      at parseExprAtom (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:1162:21)
+      at parseExprAtom (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\jsx\index.ts:583:22)
+      at parseExprSubscripts (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:734:23)
+      at parseUpdate (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:713:21)
+      at parseMaybeUnary (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:675:23)
+      at parseMaybeUnary (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\typescript\index.ts:3855:20)
+      at parseMaybeUnaryOrPrivate (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:409:14)
+      at parseExprOps (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:421:23)
+      at parseMaybeConditional (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:376:23)
+      at parseMaybeAssign (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:301:21)
+      at parseMaybeAssign (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\plugins\typescript\index.ts:3727:22)
+      at parseExpressionBase (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:226:23)
+      at callback (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:217:39)
+      at allowInAnd (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:3187:16)
+      at parseExpression (C:\Users\samsung\Downloads\Cloud-v1-1 (30)\Cloud-v1-1\node_modules\@babel\parser\src\parser\expression.ts:217:17)
