@@ -5952,7 +5952,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       if (!Array.isArray(monitors)) {
         return res.status(400).json({
-          message: "Invalid request format.          total: 0,
+          message: "Invalid request format.",         
+          total: 0,
           successful: 0,
           failed: 0,
           updated: 0,
